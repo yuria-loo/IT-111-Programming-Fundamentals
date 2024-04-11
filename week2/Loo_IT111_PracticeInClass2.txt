@@ -1,0 +1,26 @@
+Name: Yuria Loo
+Class: IT 111
+Date: 2024-04-10
+
+Practice in Class2
+
+- Create a file
+myFile = open("createFile.txt", "x")
+myFile.close()
+
+- Write a file
+myFile2 = open("writeFile.txt", "w")
+myFile2.write("This is a demo text for writing.")
+myFile.close()
+
+-Append to a file
+myFile3 = open("appendFile.txt", "a")
+myFile3.write("This is a demo for adding texts to a file.")
+myFile.close()
+
+-Delete a file
+import os
+if os.path.exists("deleteFile.txt"):
+  os.remove("deleteFile.txt")
+else:
+  print("The file does not exist")
