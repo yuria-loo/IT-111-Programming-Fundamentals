@@ -1,6 +1,7 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
+from flask_restx import Api 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -60,6 +61,24 @@ def update(id):
             return 'There was an issue updating your task'
     else:
         return render_template('update.html', task=task)
+        
+@app.route('/about')
+def about():
+    return 'hey there'
+
+@app.route('/api/tasks', methods=['GET'])
+def get_tasks():
+    tasks = Todo.query.all()
+    task_list = []
+    for task in tasks:
+        task_info = {
+            'id': task.id, 
+            'content': task.content, 
+            'date_created': task.date_created
+        }
+        task_list.append(task_info)
+    
+    return jsonify(task_list)
 
 
 if __name__ == "__main__":
